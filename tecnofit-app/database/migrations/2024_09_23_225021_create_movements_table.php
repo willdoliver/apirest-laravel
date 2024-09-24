@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\User;
+use App\Models\Movement;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,21 +14,21 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('movements', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable(false);
         });
 
         $records = [
-            ['name' => 'Joao'],
-            ['name' => 'Jose'],
-            ['name' => 'Paulo']
+            ['name' => 'Deadlift'],
+            ['name' => 'Back Squat'],
+            ['name' => 'Bench Press']
         ];
 
         foreach ($records as $record){
-            $user = new User();
-            $user->name = $record['name'];
-            $user->save();
+            $movement = new Movement();
+            $movement->name = $record['name'];
+            $movement->save();
         }
     }
 
@@ -39,6 +39,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('movements');
     }
 };
