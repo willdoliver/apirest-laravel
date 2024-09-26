@@ -40,6 +40,12 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->middleware('auth')
                 ->name('logout');
 
+Route::get('/not-found', function () {
+    return response()->json([
+        'error' => 'Request error, please check your token'
+    ], 404);
+})->name('not-found');
+
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/v1/users', [UserController::class, 'list']);
     Route::get('/v1/movements', [MovementController::class, 'list']);

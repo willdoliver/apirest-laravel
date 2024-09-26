@@ -4,12 +4,11 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Laravel\Sanctum\HasApiTokens;
 
 class AuthorizedUsers extends Authenticatable
 {
-    use Notifiable;
+    use HasApiTokens, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -19,15 +18,12 @@ class AuthorizedUsers extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'email_verified_at',
         'password',
     ];
 
     protected $hidden = [
-        'password'
+        'password',
+        'remember_token'
     ];
 
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
 }
