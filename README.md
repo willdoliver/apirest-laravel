@@ -33,14 +33,38 @@ or change to an available port instead 8088
 
 create default user to perform requests
 using tinker
-php artisan tinker
+
+    php artisan tinker
 
     use App\Models\AuthorizedUser;
     AuthorizedUsers::create([
         'name' => 'admin',
         'email' => 'admin@tecnofit.com.br',
-        'password' => Hash::make('admin'),  // Make sure to hash the password
+        'password' => Hash::make('admin'),
     ]);
+    q (to exit tinker)
+
+Using curl request
+
+    curl -X POST http://localhost:8088/api/register \
+    -H "Content-Type: application/json" \
+    -d '{"name": "admin", "email": "admin@tecnofit.com.br", "password": "password", "password_confirmation": "password"}'
+
+After registered, should call /login to get a token
+
+Using curl request
+
+    curl -X POST http://localhost:8088/api/login \
+    -H "Content-Type: application/json" \
+    -d '{"email": "admin@tecnofit.com.br", "password": "password"}'
+
+### TODOs
+
+- Swagger
+- Testes
+- Logs
+- Pagination
+- Cache
 
 ## About Laravel
 
